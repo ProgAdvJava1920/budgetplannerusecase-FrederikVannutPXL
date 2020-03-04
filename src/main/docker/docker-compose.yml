@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  budgetPlanner-db:
+  budgetplanner:
     image: mysql:5.6
     ports:
       - "3306:3306"

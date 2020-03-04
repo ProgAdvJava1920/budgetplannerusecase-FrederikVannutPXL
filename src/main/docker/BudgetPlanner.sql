@@ -17,63 +17,63 @@ SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE =
 
 -- -----------------------------------------------------
 -- Schema budgetplanner
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS budgetplanner DEFAULT CHARACTER SET utf8;
-USE budgetplanner;
+-- --------------------- --------------------------------
+CREATE SCHEMA IF NOT EXISTS `budgetplanner` DEFAULT CHARACTER SET utf8;
+USE `budgetplanner`;
 
 -- -----------------------------------------------------
--- Table budgetplanner.`Account`
+-- Table `budgetplanner`.`Account`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS budgetplanner.`Account`
+CREATE TABLE IF NOT EXISTS `budgetplanner`.`Account`
 (
-    id   INT         NOT NULL AUTO_INCREMENT,
-    IBAN VARCHAR(34) NULL DEFAULT NULL,
-    name VARCHAR(45) NULL DEFAULT NULL,
-    PRIMARY KEY (id)
+    `id`   INT         NOT NULL AUTO_INCREMENT,
+    `IBAN` VARCHAR(34) NULL DEFAULT NULL,
+    `name` VARCHAR(45) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table budgetplanner.`Label`
+-- Table `budgetplanner`.`Label`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS budgetplanner.`Label`
+CREATE TABLE IF NOT EXISTS `budgetplanner`.`Label`
 (
-    id          INT          NOT NULL AUTO_INCREMENT,
-    name        VARCHAR(45)  NULL DEFAULT NULL,
-    description VARCHAR(255) NULL DEFAULT NULL,
-    PRIMARY KEY (id)
+    `id`          INT          NOT NULL AUTO_INCREMENT,
+    `name`        VARCHAR(45)  NULL DEFAULT NULL,
+    `description` VARCHAR(255) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table budgetplanner.`Payment`
+-- Table `budgetplanner`.`Payment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS budgetplanner.`Payment`
+CREATE TABLE IF NOT EXISTS `budgetplanner`.`Payment`
 (
-    id               INT          NOT NULL AUTO_INCREMENT,
-    date             DATETIME     NULL DEFAULT NULL,
-    amount           FLOAT        NULL DEFAULT NULL,
-    currency         VARCHAR(45)  NULL DEFAULT NULL,
-    detail           VARCHAR(255) NULL DEFAULT NULL,
-    accountId        INT          NOT NULL,
-    counterAccountId INT          NOT NULL,
-    labelId          INT          NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT fk_Payment_Account_Id
-        FOREIGN KEY (accountId)
-            REFERENCES budgetplanner.`Account` (id)
+    `id`               INT          NOT NULL AUTO_INCREMENT,
+    `date`             DATETIME     NULL DEFAULT NULL,
+    `amount`           FLOAT        NULL DEFAULT NULL,
+    `currency`         VARCHAR(45)  NULL DEFAULT NULL,
+    `detail`           VARCHAR(255) NULL DEFAULT NULL,
+    `accountId`        INT          NOT NULL,
+    `counterAccountId` INT          NOT NULL,
+    `labelId`          INT          NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_Payment_Account_Id`
+        FOREIGN KEY (`accountId`)
+            REFERENCES `budgetplanner`.`Account` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
-    CONSTRAINT fk_Payment_CounterAccount_Id
-        FOREIGN KEY (counterAccountId)
-            REFERENCES budgetplanner.`Account` (id)
+    CONSTRAINT `fk_Payment_CounterAccount_Id`
+        FOREIGN KEY (`counterAccountId`)
+            REFERENCES `budgetplanner`.`Account` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
-    CONSTRAINT fk_Payment_Label1
-        FOREIGN KEY (labelId)
-            REFERENCES budgetplanner.`Label` (id)
+    CONSTRAINT `fk_Payment_Label1`
+        FOREIGN KEY (`labelId`)
+            REFERENCES `budgetplanner`.`Label` (`id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
