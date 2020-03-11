@@ -8,7 +8,7 @@ import java.sql.*;
 public class PaymentDAO {
     private static final String SELECT_BY_ID = "SELECT * FROM Payment WHERE id = ?";
     private static final String UPDATE = "UPDATE Payment SET date=?, amount=?, currency=?, detail=?, accountId=?, counterAccountId=?, labelId=? WHERE id = ?";
-    private static final String INSERT = "INSERT INTO Payment (date, amount, currency, detail, accountId, counterAccountId, labelId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT = "INSERT INTO Payment (date, amount, currency, detail, accountId, counterAccountId) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM Payment WHERE id = ?";
     private String url;
     private String user;
@@ -30,7 +30,7 @@ public class PaymentDAO {
             stmt.setString(4, payment.getDetail());
             stmt.setInt(5, payment.getAccountId());
             stmt.setInt(6, payment.getCounterAccountId());
-            stmt.setInt(7, payment.getLabelId());
+            //stmt.setInt(7, payment.getLabelId());
             if (stmt.executeUpdate() == 1) {
                 try (ResultSet rs = stmt.getGeneratedKeys()) {
                     if (rs.next()) {
